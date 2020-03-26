@@ -11,6 +11,12 @@ with open('db.json') as json_file:
 
 try:
     cnx = mysql.connector.connect(**config)
+    cursor = cnx.cursor()
+    query = ("SELECT * FROM user")
+    cursor.execute(query)
+
+    for (firstname, lastname, age) in cursor:
+        print(f"{firstname}\t{lastname}\t{age}")
     
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
